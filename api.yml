@@ -1,0 +1,177 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Microservice for User
+  description: C# + PostgreSQL
+  license:
+    name: Perime Software, 2020-I
+host: host:5001
+basePath: /perime-user-ms/
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /user:
+    post:
+      summary: Creates a new user
+      operationId: InsertUser
+      parameters:
+        - name: user
+          in: body
+          required: true
+          description: User Object
+          schema:
+            $ref: '#/definitions/UserInput'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    get:
+      summary: Returns all users
+      operationId: GetUsers
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/UsersList'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /user/{id}:
+    get:
+      summary: Returns an user with the given id
+      operationId: GetUserById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to be returned
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/User'
+        '204':
+          description: Not Content
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+    put:
+      summary: Updates an user with the given id
+      operationId: UpdateUser
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to be updated
+          required: true
+          type: integer
+        - name: user
+          in: body
+          required: true
+          description: User Object
+          schema:
+            $ref: '#/definitions/UserInput'
+      responses:
+        '204':
+          description: No Content
+        '405':
+          description: Method Not Allowed
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+    delete:
+      summary: Deletes an user with the given id
+      operationId: DeleteUser
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to be deleted
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+definitions:
+
+  # Users
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      Username:
+        type: string
+      Passhash:
+        type: string
+      Address:
+        type: string
+      Cellphone:
+        type: integer
+      Email:
+        type: string
+
+  UserInput:
+    type: object
+    properties:
+      Username:
+        type: string
+      Passhash:
+        type: string
+      Address:
+        type: string
+      Cellphone:
+        type: integer
+      Email:
+        type: string
+
+  UsersList:
+    type: object
+    required:
+      - total
+      - list
+    properties:
+      total:
+        type: number
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/User'
+
+# Errors
+  ErrorModel:
+    type: object
+    required:
+      - code
+    properties:
+      code:
+        type: number
+      description:
+        type: object

@@ -1,0 +1,15 @@
+using userService.Model;
+using System.Collections.Generic;
+
+namespace userService.Repository
+{
+    public interface IUserRepository
+    {
+        IEnumerable<User> GetUsers();
+        User GetUserById(int userId);
+        void InsertUser(User user);
+        void DeleteUser(int userId);
+        void UpdateUser(User user);
+        void Save();
+    }
+}

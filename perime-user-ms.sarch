@@ -1,0 +1,22 @@
+
+
+data_model_view ::
+	relational data_model perime-user-db {
+		elements {
+			data_entity user {
+				attributes {
+					int id;
+					string username;
+					string passhash;
+					string address;
+					string email;
+					int cellphone;
+						}
+					}
+					
+				}
+
+				relations {
+				}
+			}
+
