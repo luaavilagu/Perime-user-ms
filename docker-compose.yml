@@ -1,5 +1,6 @@
 version: '3.7'
 
+
 networks: 
   userservice-dev:
     driver: bridge
@@ -14,8 +15,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5001:5001"
-    extra_hosts: 
-      - "inDockerHost:172.17.0.1"
     environment: 
       DB_CONNECTION_STRING: "host=postgres_image;port=5432;database=perime-user-db;username=postgresuser;password=admin"
     networks: 
