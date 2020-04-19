@@ -1,9 +1,5 @@
 version: '3.7'
 
-networks: 
-  userservice-dev:
-    driver: bridge
-
 services:
   userservice:
     image: perime-user-ms:latest
@@ -13,14 +9,8 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5001:5001"
-    extra_hosts: 
-      - "inDockerHost:172.17.0.1"
-    environment: 
-      DB_CONNECTION_STRING: "host=postgres_image;port=5432;database=perime-user-db;username=postgresuser;password=admin"
-    networks: 
-      - userservice-dev
-
+      - "5000:80"
+     
   perime-user-db:
     image: postgres:latest
     ports:
@@ -28,13 +18,16 @@ services:
     restart: always
     volumes:
       - db_volume:/var/lib/postgresql/data
-      - ./DBscripts/scriptPostgresCreate.sql :/docker-entrypoint-initdb.d/scriptPostgresCreate.sql
+      - ./DBscripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+    healthcheck: 
+      test: "psql -u $$POSTGRES_USER -p $$POSTGRES_PASSWORD $$POSTGRES_DB"
+      interval: 20s
+      timeout: 5s
+      retries: 10
     environment: 
       POSTGRES_USER: "postgresuser"
       POSTGRES_PASSWORD: "admin"
       POSTGRES_DB: "perime-user-db"
-    networks: 
-      - userservice-dev
-
+   
 volumes: 
   db_volume:

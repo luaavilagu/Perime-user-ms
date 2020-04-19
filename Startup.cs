@@ -37,16 +37,8 @@ namespace userService
             services.AddEntityFrameworkNpgsql().AddDbContext<UserContext>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("DB_CONNECTION_STRING")));
             
-            //optional
-            //
             services.AddEntityFrameworkNpgsql().AddTransient<IUserRepository, UserRepository>();
             
-
-            //
-                    
-            //
-
-
 
         }
 

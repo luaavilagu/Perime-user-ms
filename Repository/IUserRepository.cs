@@ -9,7 +9,7 @@ namespace userService.Repository
         User GetUserById(int userId);
         void InsertUser(User user);
         void DeleteUser(int userId);
-        void UpdateUser(User user);
+        void UpdateUser(User user, int userId);
         void Save();
     }
 }

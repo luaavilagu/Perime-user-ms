@@ -12,6 +12,7 @@ namespace userService.DBContext
 
         public DbSet<User> Users {get; set;}
 
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
@@ -35,7 +36,7 @@ namespace userService.DBContext
                 }   
             );
         }
-    
+        */
         
 
     }

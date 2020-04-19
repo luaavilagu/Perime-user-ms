@@ -9,8 +9,8 @@ using userService.DBContext;
 namespace userService.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20200412174806_initial")]
-    partial class initial
+    [Migration("20200419022526_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,49 +22,29 @@ namespace userService.Migrations
 
             modelBuilder.Entity("userService.Model.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("address")
                         .HasColumnType("text");
 
-                    b.Property<long>("Cellphone")
+                    b.Property<long>("cellphone")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
                         .HasColumnType("text");
 
-                    b.Property<string>("Passhash")
+                    b.Property<string>("passhash")
                         .HasColumnType("text");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("username")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Address1",
-                            Cellphone = 1L,
-                            Email = "Email1",
-                            Passhash = "Passhash1",
-                            Username = "Username1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Address2",
-                            Cellphone = 2L,
-                            Email = "Email1",
-                            Passhash = "Passhash2",
-                            Username = "Username2"
-                        });
                 });
 #pragma warning restore 612, 618
         }

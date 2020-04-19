@@ -68,8 +68,10 @@ namespace userService.Controllers
       
     }
 
-    [HttpPut]
-    public IActionResult Put([FromBody] User user)
+    //[HttpGet("{id}", Name = "Get")]
+    //[HttpPut]
+    [HttpPut("{id}", Name = "Put")]
+    public IActionResult Put(int id, [FromBody] User user)
     {
       try
       {
@@ -77,7 +79,7 @@ namespace userService.Controllers
         {
           using (var scope = new TransactionScope())
           {
-            _userRepository.UpdateUser(user);
+            _userRepository.UpdateUser(user, id);
             scope.Complete();
             return new OkResult();
           }

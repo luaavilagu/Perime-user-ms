@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "K68+7fAy4cAf8FsTLQd+HLb6h+/lpAu2chEXKtAQAEqVEKtY7ETxcXCcwjkEAlEPO8Hxidl4HWzHBycCdm/cBQ==",
+  "dgSpecHash": "7jnrSrnOWTZ/KR8k7okJLuvl4CmNvNQa2C+tx3wOxAZCl7uFnnPwdWPSqNqzIKfjw2ODqlYqb0ye/Zet5qQ/yg==",
   "success": true,
-  "projectFilePath": "/home/alejandro/Desktop/userService/userService.csproj",
+  "projectFilePath": "/home/alejandro/Documents/UN/2020-1/arquitectura/proyecto/code/v2/userService/userService.csproj",
   "expectedPackageFiles": [
     "/usr/share/dotnet/sdk/NuGetFallbackFolder/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/usr/share/dotnet/sdk/NuGetFallbackFolder/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -45,9 +45,32 @@ namespace userService.Repository
             _dbContext.SaveChanges();
         }
 
-        public void UpdateUser(User user)
+        public void UpdateUser(User user, int userId)
         {
-            _dbContext.Entry(user).State = EntityState.Modified;
+            User userToUpdate = _dbContext.Users.Find(userId);
+
+            if (user.username != userToUpdate.username && user.username != null){
+                userToUpdate.username = user.username; 
+            }
+
+            if (user.passhash != userToUpdate.passhash && user.passhash != null){
+                userToUpdate.passhash = user.passhash;
+            } 
+
+            if (user.address != userToUpdate.address && user.address != null){
+                userToUpdate.address = user.address;
+            }
+
+            if (user.cellphone != userToUpdate.cellphone && user.cellphone != 0){
+                userToUpdate.cellphone = user.cellphone;
+            }
+
+            if (user.email != userToUpdate.email && user.email != null){
+                userToUpdate.email = user.email;
+            }
+
+
+            _dbContext.Entry(userToUpdate).State = EntityState.Modified;
             Save();
         }
 

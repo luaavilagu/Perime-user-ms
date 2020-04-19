@@ -1866,11 +1866,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/alejandro/Desktop/userService/userService.csproj",
+      "projectUniqueName": "/home/alejandro/Documents/UN/2020-1/arquitectura/proyecto/code/v2/userService/userService.csproj",
       "projectName": "userService",
-      "projectPath": "/home/alejandro/Desktop/userService/userService.csproj",
+      "projectPath": "/home/alejandro/Documents/UN/2020-1/arquitectura/proyecto/code/v2/userService/userService.csproj",
       "packagesPath": "/home/alejandro/.nuget/packages/",
-      "outputPath": "/home/alejandro/Desktop/userService/obj/",
+      "outputPath": "/home/alejandro/Documents/UN/2020-1/arquitectura/proyecto/code/v2/userService/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
