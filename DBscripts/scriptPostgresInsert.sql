@@ -19,12 +19,6 @@ ALTER TABLE public."Users"
 
 
 
-INSERT INTO "Users" ("id", "address", "cellphone", "email", "passhash", "username") 
-VALUES (10001, 'Address1', 1, 'Email1', 'Passhash1', 'Username1');
-INSERT INTO "Users" ("id", "address", "cellphone", "email", "passhash", "username")
-VALUES (20001, 'Address2', 2, 'Email1', 'Passhash2', 'Username2');
-
-
 
 ----------- COPY SEED.SQL 21/04/2020
 
