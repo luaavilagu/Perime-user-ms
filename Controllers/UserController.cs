@@ -81,7 +81,8 @@ namespace userService.Controllers
           {
             _userRepository.UpdateUser(user, id);
             scope.Complete();
-            return new OkResult();
+            var userUpdated =_userRepository.GetUserById(id);
+            return new OkObjectResult(userUpdated);
           }
         }
         return new NoContentResult();
@@ -98,8 +99,10 @@ namespace userService.Controllers
     {
       try
       {
+        var userDeleted = _userRepository.GetUserById(id);
         _userRepository.DeleteUser(id);
-        return new OkResult();
+        //return new OkResult();
+        return new OkObjectResult(userDeleted);
       }
       catch(Exception)
       {
