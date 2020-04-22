@@ -58,7 +58,7 @@ namespace userService.Controllers
         {
           _userRepository.InsertUser(user);
           scope.Complete();
-          return CreatedAtAction(nameof(Get), new { id = user.id }, user);
+          return CreatedAtAction(nameof(Get), new { id = user.id_user }, user);
         }
       }
       catch(Exception)

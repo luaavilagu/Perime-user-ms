@@ -49,24 +49,24 @@ namespace userService.Repository
         {
             User userToUpdate = _dbContext.Users.Find(userId);
 
-            if (user.username != userToUpdate.username && user.username != null){
-                userToUpdate.username = user.username; 
+            if (user.username_user != userToUpdate.username_user && user.username_user != null){
+                userToUpdate.username_user = user.username_user; 
             }
 
-            if (user.passhash != userToUpdate.passhash && user.passhash != null){
-                userToUpdate.passhash = user.passhash;
+            if (user.passhash_user != userToUpdate.passhash_user && user.passhash_user != null){
+                userToUpdate.passhash_user = user.passhash_user;
             } 
 
-            if (user.address != userToUpdate.address && user.address != null){
-                userToUpdate.address = user.address;
+            if (user.address_user != userToUpdate.address_user && user.address_user != null){
+                userToUpdate.address_user = user.address_user;
             }
 
-            if (user.cellphone != userToUpdate.cellphone && user.cellphone != 0){
-                userToUpdate.cellphone = user.cellphone;
+            if (user.cellphone_user != userToUpdate.cellphone_user && user.cellphone_user != null){
+                userToUpdate.cellphone_user = user.cellphone_user;
             }
 
-            if (user.email != userToUpdate.email && user.email != null){
-                userToUpdate.email = user.email;
+            if (user.email_user != userToUpdate.email_user && user.email_user != null){
+                userToUpdate.email_user = user.email_user;
             }
 
 
