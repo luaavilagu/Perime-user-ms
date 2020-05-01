@@ -9,9 +9,19 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
+<<<<<<< HEAD
       - "5000:80"
      
   userdatabase:
+=======
+      - "5001:5001"
+    environment: 
+      DB_CONNECTION_STRING: "host=postgres_image;port=5432;database=perime-user-db;username=postgresuser;password=admin"
+    networks: 
+      - userservice-dev
+
+  perime-user-db:
+>>>>>>> c7985f98c838124986e4592584f07e57ab1afdfa
     image: postgres:latest
     ports:
       - "5432"
