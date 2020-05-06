@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using userService.Model;
 
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
+
 namespace userService.Repository
 {
     public class UserRepository : IUserRepository
@@ -36,6 +39,7 @@ namespace userService.Repository
 
         public void InsertUser(User user)
         {
+            user.passhash_user = CalculateHash(user.passhash_user);
             _dbContext.Add(user);
             Save();
         }
@@ -54,6 +58,7 @@ namespace userService.Repository
             }
 
             if (user.passhash_user != userToUpdate.passhash_user && user.passhash_user != null){
+                user.passhash_user = CalculateHash(user.passhash_user);
                 userToUpdate.passhash_user = user.passhash_user;
             } 
 
@@ -74,5 +79,43 @@ namespace userService.Repository
             Save();
         }
 
+        public User GetUserByEmail(string email){
+            User userGot = _dbContext.Users.SingleOrDefault(
+                a => a.email_user.Equals(email)
+            );
+            return userGot;
+        }
+
+        public string CalculateHash(string input)
+        {
+            var salt = GenerateSalt(16);
+            var bytes = KeyDerivation.Pbkdf2(input, salt, KeyDerivationPrf.HMACSHA512, 10000, 16);
+            return $"{ Convert.ToBase64String(salt) }:{ Convert.ToBase64String(bytes) }";
+        }
+
+        public byte[] GenerateSalt(int length)
+        {
+            var salt = new byte[length];
+            using (var random = RandomNumberGenerator.Create())
+            {
+        	    random.GetBytes(salt);
+            }
+            return salt;
+        }
+
+        public bool CheckMatch(string hash, string input)
+        {
+            try
+            {
+        	    var parts = hash.Split(':');
+        	    var salt = Convert.FromBase64String(parts[0]);
+        	    var bytes = KeyDerivation.Pbkdf2(input, salt, KeyDerivationPrf.HMACSHA512, 10000, 16);
+        	    return parts[1].Equals(Convert.ToBase64String(bytes));
+            }
+            catch
+            {
+        	    return false;
+            }            
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace userService.Controllers
 {
-  [Route("perime-user-ms/[Controller]")]
+  [Route("perime-user-ms/[controller]")]
   [ApiController]
   public class UserController : ControllerBase
   {
@@ -34,6 +34,7 @@ namespace userService.Controllers
       }
     }
 
+/*
     [HttpGet("{id}", Name = "Get")]
     public IActionResult Get(int id)
     {
@@ -48,18 +49,15 @@ namespace userService.Controllers
       }
       
     }
+*/
 
-    [HttpPost]
-    public IActionResult Post([FromBody] User user)
+    [HttpGet("{email}", Name = "Get")]
+    public IActionResult Get(string email)
     {
       try
       {
-        using (var scope = new TransactionScope())
-        {
-          _userRepository.InsertUser(user);
-          scope.Complete();
-          return CreatedAtAction(nameof(Get), new { id = user.id_user }, user);
-        }
+        var user = _userRepository.GetUserByEmail(email);
+        return new OkObjectResult(user);
       }
       catch(Exception)
       {
@@ -68,8 +66,28 @@ namespace userService.Controllers
       
     }
 
-    //[HttpGet("{id}", Name = "Get")]
-    //[HttpPut]
+
+    [HttpPost]
+    public IActionResult Post([FromBody] User user)
+    {
+      try
+      {
+        using (var scope = new TransactionScope())
+        {          
+          _userRepository.InsertUser(user);
+          scope.Complete();
+          return CreatedAtAction(nameof(Get), new { id = user.id_user }, user);
+        }
+      
+      }
+      catch(Exception)
+      {
+        return new StatusCodeResult(500);
+      }
+      
+    }
+
+
     [HttpPut("{id}", Name = "Put")]
     public IActionResult Put(int id, [FromBody] User user)
     {

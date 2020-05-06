@@ -10,6 +10,10 @@ namespace userService.Repository
         void InsertUser(User user);
         void DeleteUser(int userId);
         void UpdateUser(User user, int userId);
+        User GetUserByEmail(string email);
         void Save();
+        string CalculateHash(string input);
+        byte[] GenerateSalt(int length);
+        bool CheckMatch(string hash, string input);
     }
 }
