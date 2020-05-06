@@ -18,6 +18,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using userService.Repository;
 using userService.DBContext;
 
+using userService.Service;
+
 namespace userService
 {
     public class Startup
@@ -39,7 +41,7 @@ namespace userService
             
             services.AddEntityFrameworkNpgsql().AddTransient<IUserRepository, UserRepository>();
             
-
+            services.AddTokenAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +55,8 @@ namespace userService
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

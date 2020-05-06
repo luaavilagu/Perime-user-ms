@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Transactions;
 
+using Microsoft.Extensions.Configuration;
+using userService.Service;
+
 namespace userService.Controllers
 {
   [Route("perime-user-ms/[controller]")]
@@ -14,10 +17,11 @@ namespace userService.Controllers
   {
 
     private readonly IUserRepository _userRepository;
-
-    public LoginController (IUserRepository userRepository)
+    private IConfiguration _config;
+    public LoginController (IUserRepository userRepository, IConfiguration config)
     {
       _userRepository = userRepository;
+      _config = config;
     }
 
 
@@ -32,11 +36,13 @@ namespace userService.Controllers
           
             if (_userRepository.CheckMatch(userGot.passhash_user, login.password))
             {
-                return Ok(userGot);
+              var jwt = new JwtService(_config);
+              var token = jwt.GenerateSecurityToken(userGot);
+              return Ok(token);
             }
             else
             {
-                return Content("Invalid Password");
+              return Content("Invalid Password");
             }
           }
           else

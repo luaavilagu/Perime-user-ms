@@ -4,6 +4,7 @@ using userService.Repository;
 using System;
 using System.Collections.Generic;
 using System.Transactions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace userService.Controllers
 {
@@ -19,7 +20,7 @@ namespace userService.Controllers
       _userRepository = userRepository;
     }
 
-
+    [Authorize]
     [HttpGet]
     public IActionResult Get()
     {
@@ -50,7 +51,7 @@ namespace userService.Controllers
       
     }
 */
-
+    [Authorize]
     [HttpGet("{email}", Name = "Get")]
     public IActionResult Get(string email)
     {
@@ -87,7 +88,7 @@ namespace userService.Controllers
       
     }
 
-
+    [Authorize]
     [HttpPut("{id}", Name = "Put")]
     public IActionResult Put(int id, [FromBody] User user)
     {
@@ -112,6 +113,7 @@ namespace userService.Controllers
       
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
